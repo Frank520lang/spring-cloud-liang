@@ -1,0 +1,33 @@
+server:
+  port: 9527
+
+spring:
+  application:
+    name: springcloud-provider-zuul #微服务名称
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
+  instance:
+    instance-id: zuul9527.com
+    prefer-ip-address: true  #显示IP
+
+info:
+  app.name: liang.springcloud
+
+#zuul路由网关配置
+
+# 路由相关配置
+# 原来访问路由 eg:http://127.0.0.1/springcloud-provider-dept/dept/get/1
+# zull路由配置后访问路由 eg:http://127.0.0.1:9527/liang/mydept/dept/get/1
+zuul:
+  routes:
+    liang.serviceId: springcloud-provider-dept # eureka注册中心的服务提供方路由名称
+    liang.path: /liang/** # 将eureka注册中心的服务提供方路由名称 改为自定义路由名称
+  # 不能再使用这个路径访问了，*： 忽略,隐藏全部的服务名称~,也可以隐藏单个微服务
+    ignored-services: "*"
+  #  设置公共前缀
+  prefix: /liang
+
+
