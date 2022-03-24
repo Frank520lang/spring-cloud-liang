@@ -1,0 +1,12 @@
+# 系统级别的配置
+spring:
+  cloud:
+    config:
+#     需要从git上读取的资源名称，不要后缀
+      name: configclient
+#      环境
+      profile: dev
+#      gitee分支
+      label: master
+#      config服务端的IP+端口号
+      uri: http://localhost:3344
